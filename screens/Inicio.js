@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
 import React from 'react'
+import ComoJugar from './ComoJugar'
 
-const Inicio = () => {
+export default function Inicio ({navigation}) {
   return (
     <View style={styles.fondo}>
       <Text style={styles.titulo}>DEMOCRACIA</Text>
@@ -10,11 +11,13 @@ const Inicio = () => {
       <TouchableOpacity style={styles.button} onPress={() => console.log('Button pressed')}>
         <Text style={styles.buttonText}>Iniciar</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Instrucciones')}>
+        <Text style={styles.buttonText}>Como Jugar</Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
-export default Inicio
 
 const styles = StyleSheet.create({
     titulo: {
