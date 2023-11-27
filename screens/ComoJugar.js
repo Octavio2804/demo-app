@@ -6,7 +6,7 @@ const ComoJugar = () => {
     <ScrollView>
     <View style={styles.fondo}>
       <Text style={styles.titulo}>Instrucciones:</Text>
-      <Text style={styles.texto}>Paso 1: Tener amigos (Dificl, lo sabemos)</Text>
+      <Text style={styles.texto}>Paso 1: Tener amigos (Dificil, lo sabemos)</Text>
       <Text style={styles.texto}>Paso 2: No tener nada mejor que hacer y descargar este juego (Por favor juegenlo, estoy desesperado)</Text>
       <Text style={styles.texto}>Paso 3: Leer esto:</Text>
       <Text style={styles.texto}>El juego es simple, primero se colocan los nombres de todos los jugadores que vayan a formar parte del juego. De ahi, el juego se encarga de poner un enunciado y los juadores van pasando el celular y votando a quien creeen que encaja mejor con lo dicho. Los votos puede ser copletamente anonimos, a menos que quieras humillar más a tu amigo y decir porque elegiste votar por él o ella.</Text>
