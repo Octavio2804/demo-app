@@ -5,6 +5,7 @@ import ComoJugar from './screens/ComoJugar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native-web';
+import Jugadores from './screens/Jugadores';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +21,7 @@ export default function App() {
             headerShown: false,
           }}
         />
-           <Stack.Screen
+        <Stack.Screen
           name='Instrucciones'
           component={ComoJugar}
           options={{
@@ -33,6 +34,19 @@ export default function App() {
             }
           }}
         />
+        <Stack.Screen
+          name='Jugadores'
+          component={Jugadores}
+          options={{
+            headerStyle: {
+              backgroundColor: '#CD533B',
+            },
+            headerLargeTitleStyle: {
+              fontWeight: 'bold',
+            }
+          }}
+        />
+        
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -1,25 +1,34 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import React from 'react'
-import ComoJugar from './ComoJugar'
+
+const img = require("../assets/img/FONDO1.jpg")
 
 export default function Inicio ({navigation}) {
   return (
     <View style={styles.fondo}>
+    <ImageBackground source={img} style={styles.fotofondo} resizeMode='cover'>
       <Text style={styles.titulo}>DEMOCRACIA</Text>
       <Text style={styles.subtitulo}>El juego que nos recuerda que no siempre es buena idea</Text>
       {/* <Button title='Iniciar' style={styles.boton} /> */}
-      <TouchableOpacity style={styles.button} onPress={() => console.log('Button pressed')}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Jugadores')}>
         <Text style={styles.buttonText}>Iniciar</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Instrucciones')}>
         <Text style={styles.buttonText}>Como Jugar</Text>
       </TouchableOpacity>
+      <Image source={require('../assets/img/LogoPngBlanco-sinfondo.png')} style={styles.logo}/>
+      </ImageBackground>
     </View>
   )
 }
 
 
 const styles = StyleSheet.create({
+  fotofondo: {
+    ...StyleSheet.absoluteFillObject,
+    width: '100%', 
+    height: '80%',
+  },
     titulo: {
       fontSize: 27,
       fontWeight: 'bold',
@@ -51,5 +60,12 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 16,
       textAlign: 'center',
+    },
+    logo: {
+      width: 100,
+      height: 100,
+      alignSelf: 'center',
+      marginTop: 225,
+      marginLeft: 30
     },
   })
