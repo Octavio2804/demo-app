@@ -1,17 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Inicio from './screens/Inicio';
-import ComoJugar from './screens/ComoJugar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MantenerPlayers } from './playercontext/PlayerContext';
+import Inicio from './screens/Inicio';
+import ComoJugar from './screens/ComoJugar';
 import { Image } from 'react-native-web';
 import Jugadores from './screens/Jugadores';
+import Resultado from "./screens/Resultado"
+import Juego from './screens/Juego';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
 
+    <MantenerPlayers>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -46,9 +50,29 @@ export default function App() {
             }
           }}
         />
+        <Stack.Screen
+          name='Juego'
+          component={Juego}
+          options={{
+             headerStyle: {
+              backgroundColor: '#CD533B',
+            },
+            headerLargeTitleStyle: {
+              fontWeight: 'bold',
+            }
+          }}
+        />
+
+        <Stack.Screen
+          name='Resultado'
+          component={Resultado}
+          options={{
+            headerShown: false,
+          }}
+        />
         
       </Stack.Navigator>
     </NavigationContainer>
-
+  </MantenerPlayers>
   );
 }

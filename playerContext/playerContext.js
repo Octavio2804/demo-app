@@ -1,37 +1,19 @@
-// PlayersContext.js
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-const PlayersContext = createContext();
+const PlayerContext = createContext();
 
-const initialState = {
-  players: [],
-};
+const MantenerPlayers = ({ children }) => {
+  const [players, setPlayers] = useState([]);
 
-const playersReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_PLAYER':
-      return { ...state, players: [...state.players, action.payload] };
-    case 'REMOVE_PLAYER':
-      return { ...state, players: state.players.filter(player => player !== action.payload) };
-    default:
-      return state;
-  }
-};
-
-export const PlayersProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(playersReducer, initialState);
+  const addPlayer = (player) => {
+    setPlayers([...players, player.toUpperCase()]);
+  };
 
   return (
-    <PlayersContext.Provider value={{ state, dispatch }}>
+    <PlayerContext.Provider value={{ players, addPlayer }}>
       {children}
-    </PlayersContext.Provider>
+    </PlayerContext.Provider>
   );
 };
 
-export const usePlayers = () => {
-  const context = useContext(PlayersContext);
-  if (!context) {
-    throw new Error('usePlayers must be used within a PlayersProvider');
-  }
-  return context;
-};
+export { PlayerContext, MantenerPlayers };

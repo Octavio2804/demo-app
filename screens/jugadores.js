@@ -1,57 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, FlatList, Alert, ImageBackground } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 const img = require("../assets/img/FONDO1.jpg");
+import Juego from './Juego';
+import { PlayerContext } from '../playercontext/PlayerContext';
 
-const Jugadores = () => {
-  const [newPlayer, setNewPlayer] = useState('');
-  const [players, setPlayers] = useState([]);
+const Jugadores = ({ navigation }) => {
+  const { players, addPlayer } = useContext(PlayerContext);
+  const [newPlayer, setNewPlayer] = React.useState('');
 
   const handleAddPlayer = () => {
     if (newPlayer.trim() === '') {
       Alert.alert('¿Qué hacés?', 'No escribiste nada...');
     } else {
-      setPlayers([...players, newPlayer.toUpperCase()]);
+      addPlayer(newPlayer);
       setNewPlayer('');
     }
   };
 
-  const handleRemovePlayer = (player) => {
-    setPlayers(players.filter((p) => p !== player));
-  };
-
   return (
-    <View style={styles.container}>
-      <ImageBackground source={img} style={styles.fotofondo} resizeMode='cover'>
-        <View style={styles.contentContainer}>
-          <Text style={styles.title}>Ingresar jugadores</Text>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Nuevo jugador"
-              value={newPlayer}
-              onChangeText={(text) => setNewPlayer(text)}
-            />
-            <Button title="Agregar" color={"green"} onPress={handleAddPlayer} />
-          </View>
-          <Text style={styles.subtitle}>Lista de jugadores:</Text>
-          <FlatList
-            data={players}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.playerItem}>
-                <View style={styles.playerInfo}>
-                  <Text style={styles.nombre}>{item}</Text>
-                </View>
-                <Button title="Eliminar" color={"red"} onPress={() => handleRemovePlayer(item)} />
-              </View>
-            )}
+  <View style={styles.container}>
+    <ImageBackground source={img} style={styles.fotofondo} resizeMode='cover'>
+      <View style={styles.contentContainer}>
+        <Text style={styles.title}>Ingresar jugadores</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Nuevo jugador"
+            value={newPlayer}
+            onChangeText={(text) => setNewPlayer(text)}
           />
-          <Button title='Empezar juego' />
+          <Button title="Agregar" color={"green"} onPress={handleAddPlayer} />
         </View>
-      </ImageBackground>
+        <Text style={styles.subtitle}>Lista de jugadores:</Text>
+        <FlatList
+          data={players}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.playerItem}>
+              <View style={styles.playerInfo}>
+                <Text style={styles.nombre}>{item}</Text>
+              </View>
+              <Button title="Eliminar" color={"red"} onPress={() => handleRemovePlayer(item)} />
+            </View>
+          )}
+        />
+        <Button title='Empezar juego' onPress={() => navigation.navigate('Juego', {players})}/>
+      </View>
+    </ImageBackground>
+  
+      <FlatList
+        data={players}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item}</Text>
+          </View>
+        )}
+      />
+      <Button title='Empezar juego' onPress={() => navigation.navigate('Juego', { players })} />
     </View>
   );
 };
+
+const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   fotofondo: {
@@ -118,3 +131,8 @@ const styles = StyleSheet.create({
 });
 
 export default Jugadores;
+
+
+
+
+
