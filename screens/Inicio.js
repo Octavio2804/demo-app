@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     logo: {
-      width: 100,
-      height: 100,
+      width: "50%",
+      marginTop: "35%",
+      marginLeft: "10%",
+      height: "15%",
       alignSelf: 'center',
-      marginTop: 225,
-      marginLeft: 30
     },
   })

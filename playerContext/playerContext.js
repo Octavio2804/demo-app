@@ -9,8 +9,13 @@ const MantenerPlayers = ({ children }) => {
     setPlayers([...players, player.toUpperCase()]);
   };
 
+  const removePlayer = (player) => { 
+    const updatedPlayers = players.filter((p) => p !== player.toUpperCase());
+    setPlayers(updatedPlayers);
+    };
+
   return (
-    <PlayerContext.Provider value={{ players, addPlayer }}>
+    <PlayerContext.Provider value={{ players, addPlayer, removePlayer }}>
       {children}
     </PlayerContext.Provider>
   );
